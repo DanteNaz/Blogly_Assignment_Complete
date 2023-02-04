@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
+    <title>{{user.first_name}}</title>
+</head>
+
+<div class="container">
+<body>
+    <form>
+    <h1 class="display-3">
+        {{user.first_name}} {{user.last_name}} Detail Page
+    </h1>   
+
+        <p>{{user.first_name}} {{user.last_name}}</p>                                                             
+        <br>
+        <img src={{user.image_url}}>
+        <br>
+    <form>
+
+        <button><a href="/user_edit/{{user.id}}">Edit User</a></button>
+        <button><a href="/add_post/{{user.id}}">Add Post</a></button>
+        <button><a href="/user_delete/{{user.id}}" method="DELETE">Delete User</a></button>
+
+        
+
+        
+        
+            {% if user.posts %}
+            {% if user.tags %}
+
+            <button><a href="/list_tag/{{user.id}}"> Show Tags </a></button>
+            {% endif %}
+            <ul>
+            {% for post in user.posts %}
+            <br>
+            
+              <h5><a href="/posting/{{post.id}}">{{post.title}}</a></h5></p>   
+            
+            {% if post.post_2_tag %}
+            {% for tag in post.post_2_tag %}
+            <li>
+              <small>{{tag.tag.tag_name}}</small>   
+            </li>
+            {% endfor %}  
+            {% endif %}
+            <br>
+              
+              <button><a href="/delete/{{post.id}}">Delete Post</a></button>
+              <button><a href="/edit_post/{{post.id}}">Edit Post</a></button>
+              <button><a href="/add_tag/{{user.id}}/{{post.id}}">Add Tag</a></button>
+            <br>
+            {% endfor %}
+            </ul>
+            {% endif %}
+          
+    
+
+        <a href="/">Return To Previous Page</a>                                                            
+
+</body>
+</div>
+
+</html>
